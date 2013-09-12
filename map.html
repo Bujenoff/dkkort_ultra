@@ -12,31 +12,42 @@
 <body>
 
 <img src="danmarkskort.jpg" alt="danmarkskort" width="2111" height="2577" border="0" usemap="#Map" id="dkMap">
+
 <map name="Map" id="Map">
+
   <area shape="poly" title="hjoerring" coords="922,269,956,268,955,312,989,364,989,364,962,400,988,437,914,448,891,470,888,468,727,497,699,458,793,292,860,293,922,270" href="#" />
   
   
   <area shape="poly" title="frederikshavn" coords="1061,167,920,269,956,269,955,313,990,364,963,400,989,436,915,448,891,471,906,531,954,515,980,523,1001,582,999,589,1033,553,1022,452,1027,389,979,294,1060,168" href="#" alt="frederikshavn" />
-</map>
 
+</map>
+<div id='infobox' style='width:600px;height:1500px;border:solid 10px #000;position:absolute;top:190px;left:2110px; display:block;'></div>
 
 <script type="text/javascript">
 	
 $(document).ready(function ()
 {	
 	var frederikshavn = "frederikshavn er fedt";
+	
 	$('#dkMap').mapster({
-	singleSelect : true,
+	isSelectable : false,
 	render_highlight : { altImage : 'danmarkskort2.jpg' },
      mapKey: 'title',
 	fill : true, altImage : 'danmarkskort2.jpg',
+	fillColor : '555fff',
 	fillOpacity : 1,
 	stroke : true,
 	strokeColor : '000000',
 	strokeWidth : 3,
-	showToolTip : true,
-	toolTipClose: ['area-mouseout, area-click'],
-	//toolTipContainer: '<div> ... </div>',
+	onMouseover: function(data) {
+						$("infobox").([data.key][0]);
+						$("#infobox").show();
+                   // $('#beatles-caption-header').text(captions[data.key][0]);
+                    //$('#beatles-caption-text').text(captions[data.key][1]);
+                },
+	onMouseout: function(data) {
+                    $("#infobox").hide();
+                },
 	
 	areas: [{
 		key: "hjoerring",
